@@ -6,9 +6,10 @@ var clock = document.querySelector("#timer");
 var highScoreForm = document.querySelector("#highscore-form");
 var subBtn = document.querySelector("#submit-btn");
 var hsInput = document.querySelector("#hs-input");
-var backBtn = document.querySelector("#back-btn")
+var backBtn = document.querySelector("#back-btn");
+var clearBtn = document.querySelector("#clear-btn")
 var printhsList = document.querySelector("#hslist");
-var highScoreList = localStorage.getItem("highScoreList");
+var storedHS = [];
 
 var question1 = {
     question: "What functionality does JavaScript bring to a webpage?",
@@ -76,7 +77,7 @@ function startGame() {
             questionPrompt.textContent = "Game Over! You scored " + score + " points";
             clock.textContent = "";
             scoreBoard.textContent = "";
-            highScores();
+            highScoreForm.setAttribute("style", "display: flex");
         }
     }, 1000, count, questionList)
 }
@@ -113,19 +114,40 @@ function printQuestion(questionFeed) {
     }
 }
 
-function highScores() {
-    highScoreForm.setAttribute("style", "display: block");
-    highScoreForm.addEventListener("submit", printHighScores);
-}
-
-function printHighScores(event) {
-    event.preventDefault();
-    highScoreList = hsInput.value;
-    localStorage.setItem("highScoreList", JSON.stringify(highScoreList));
-    for (var i = 0; i < highScoreList.length; i++) {
-        var hslist = highScoreList[i];
-        printhsList.appendChild("li").textContent = hslist;
+function printHighScore() {
+    for (var i = 0; i < storedHS.length; i++) {
+        var hslist = storedHS[i];
+        var item = document.createElement("li");
+        item.textContent = hslist;
+        printhsList.appendChild(item);
     }
 }
 
+
 startquiz.addEventListener("click", startGame);
+subBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    subBtn.remove();
+    hsInput.remove();
+    var storedList = JSON.parse(localStorage.getItem("storedList"));
+    if (storedList !== null) {
+        storedHS = storedList
+    }
+    var hsName = hsInput.value;
+    storedHS.push(hsName);
+    localStorage.setItem("storedList", JSON.stringify(storedHS));
+    printHighScore();
+});
+
+clearBtn.addEventListener("click",function(event) {
+    event.preventDefault();
+    storedHS = [];
+    localStorage.setItem("storedList", JSON.stringify(storedHS));
+    printHighScore();
+
+});
+
+backBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    location.reload();
+})

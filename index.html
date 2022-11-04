@@ -13,11 +13,13 @@
             <button id = "startquiz">Start Quiz</button>
             <ul id="answers"></ul>
         </div>
-        <form id="highscore-form" style = "display:none" >
+        <form id="highscore-form" method = "POST" style = "display: none" >
             <h2>HighScore List </h2>
             <ul id = "hslist"></ul>
             <input type="text" placeholder="Enter your name" id="hs-input" />
-            <button id = "back-btn" onclick = "location.reload()" style = "display:none" >Back</button>
+            <button id = "submit-btn">Submit</button>
+            <button id = "back-btn">Back</button>
+            <button id = "clear-btn">Clear Highscores</button>
         </form>
         <div id = "sidebar">
             <span id = "timer">60</span>
