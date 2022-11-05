@@ -8,22 +8,26 @@
     </head>
     <body>
         <div class="card">
-            <h1>JavaScript Quiz</h1>    
-            <span id = "question">Click the "Start Quiz" button to begin a practice quiz that tests you on the basics of JavaScript</span>
-            <button id = "startquiz">Start Quiz</button>
-            <ul id="answers"></ul>
+            <h1>JavaScript Quiz</h1>
+            <section class = "quiz">    
+                <span id = "question">Click the "Start Quiz" button to begin a practice quiz that tests you on the basics of JavaScript</span>
+                <ul id="answers"></ul>
+                <button id = "startquiz">Start Quiz</button>
+            </section>
+            <form id="highscore-form" method = "POST" style = "display: none" >
+                <h2 id = "hstitle" style = "display: none">HighScore List </h2>
+                <ul id = "hslist"></ul>
+                <input type="text" placeholder="Enter your name" id="hs-input" />
+                <div class = "hsbuttons">
+                    <button id = "submit-btn">Submit</button>
+                    <button id = "back-btn">Back</button>
+                    <button id = "clear-btn">Reset Scores</button>
+                </div>
+            </form>
         </div>
-        <form id="highscore-form" method = "POST" style = "display: none" >
-            <h2>HighScore List </h2>
-            <ul id = "hslist"></ul>
-            <input type="text" placeholder="Enter your name" id="hs-input" />
-            <button id = "submit-btn">Submit</button>
-            <button id = "back-btn">Back</button>
-            <button id = "clear-btn">Clear Highscores</button>
-        </form>
         <div id = "sidebar">
-            <span id = "timer">60</span>
-            <span id = "score">0</span>
+         <h3>Time Remaining:  <span id = "timer">60</span> second(s) </h3>
+         <h3>Score: <span id = "score">0</span></h3>
         </div>
             <script src="Assets/script.js"></script>
           </body>

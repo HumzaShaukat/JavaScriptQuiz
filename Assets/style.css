@@ -1,0 +1,64 @@
+* {
+    background-color: black;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    min-height: 50vh;
+    min-width: 80%;
+    border: 5px solid white;
+    align-items: center;
+    background-color: black;
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.card li {
+    color: white;
+}
+
+.quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card button {
+    background-color: white;
+    height: 5vh;
+    width: 10vw;
+}
+
+#highscore-form {
+    display: flex;
+    color: white;
+    flex-direction: column;
+}
+
+.hsbuttons {
+    flex-direction: row;
+}
+
+#highscore-form button {
+    width: 5vw;
+    height: 10vh;
+}
+
+#hs-input {
+    color: white;
+    border: 2px solid white;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: left;
+}
+
