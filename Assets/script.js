@@ -9,6 +9,9 @@ var hsInput = document.querySelector("#hs-input");
 var backBtn = document.querySelector("#back-btn");
 var clearBtn = document.querySelector("#clear-btn")
 var printhsList = document.querySelector("#hslist");
+var quiz = document.querySelector(".quiz");
+var hsTitle = document.querySelector("#hstitle");
+var savedScore = 0;
 var storedHS = [];
 
 var question1 = {
@@ -78,6 +81,7 @@ function startGame() {
             clock.textContent = "";
             scoreBoard.textContent = "";
             highScoreForm.setAttribute("style", "display: flex");
+            savedScore = score;
         }
     }, 1000, count, questionList)
 }
@@ -125,26 +129,33 @@ function printHighScore() {
 
 
 startquiz.addEventListener("click", startGame);
-subBtn.addEventListener("click", function(event) {
+subBtn.addEventListener("click", function(event){
     event.preventDefault();
-    subBtn.remove();
-    hsInput.remove();
     var storedList = JSON.parse(localStorage.getItem("storedList"));
     if (storedList !== null) {
         storedHS = storedList
     }
-    var hsName = hsInput.value;
-    storedHS.push(hsName);
+    if (hsInput.value != "") {
+        var hsName = hsInput.value + " " + savedScore;
+        storedHS.push(hsName);
+    }
+    hsInput.value = "";
     localStorage.setItem("storedList", JSON.stringify(storedHS));
     printHighScore();
+    subBtn.remove();
+    hsInput.remove();
+    quiz.setAttribute("style", "display: none");
+    hsTitle.setAttribute("style", "display: flex")
+
 });
 
-clearBtn.addEventListener("click",function(event) {
+clearBtn.addEventListener("click", function(event){
     event.preventDefault();
+    storedHS = JSON.parse(localStorage.getItem("storedList"));
     storedHS = [];
     localStorage.setItem("storedList", JSON.stringify(storedHS));
+    printhsList.innerHTML = "";
     printHighScore();
-
 });
 
 backBtn.addEventListener("click", function(event){
