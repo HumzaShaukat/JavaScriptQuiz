@@ -11,6 +11,7 @@ var clearBtn = document.querySelector("#clear-btn")
 var printhsList = document.querySelector("#hslist");
 var quiz = document.querySelector(".quiz");
 var hsTitle = document.querySelector("#hstitle");
+var sideBar = document.querySelector("#sidebar");
 var savedScore = 0;
 var storedHS = [];
 
@@ -52,6 +53,7 @@ function startGame() {
     var currentQ = 0;
     var score = 0;
     startquiz.remove();
+    sideBar.setAttribute("style", "display: flex");
     printQuestion(questionList[count]);
     answerList.addEventListener("click", function (event) {
         var userAnswer = event.target;
@@ -81,6 +83,7 @@ function startGame() {
             clock.textContent = "";
             scoreBoard.textContent = "";
             highScoreForm.setAttribute("style", "display: flex");
+            sideBar.setAttribute("style", "display: none");
             savedScore = score;
         }
     }, 1000, count, questionList)

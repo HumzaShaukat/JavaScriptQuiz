@@ -45,14 +45,17 @@
     flex-direction: row;
 }
 
+
 #highscore-form button {
     width: 5vw;
-    height: 10vh;
+    height: 5vh;
 }
 
 #hs-input {
-    color: white;
     border: 2px solid white;
+    background-color: white;
+    height: 3vh;
+    
 }
 
 #sidebar {
@@ -62,3 +65,10 @@
     justify-content: left;
 }
 
+.answers {
+    display: flex;
+}
+
+.answers button {
+    flex-direction: column;
+}
