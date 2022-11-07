@@ -12,46 +12,53 @@ var printhsList = document.querySelector("#hslist");
 var quiz = document.querySelector(".quiz");
 var hsTitle = document.querySelector("#hstitle");
 var sideBar = document.querySelector("#sidebar");
+var viewHS = document.querySelector("#viewHS");
+var answer = document.querySelector("#correct");
 var savedScore = 0;
 var storedHS = [];
 
+// These are declarations of the questions that will be displayed.  In the future I could use Node.js to create a list that a user can input question, answers and the correct answer
+
 var question1 = {
     question: "What functionality does JavaScript bring to a webpage?",
-    answers: ["It stylizes the webpage.", "place holder", "placeholder", "placeholder"],
-    correctAns: 3
+    answers: ["It stylizes the webpage.", "It adds interactivity to the webpage", "It creates the skeleton for the webpage", "It handles queries to different databases"],
+    correctAns: 1
     };
 
 var question2 = {
-    question: "What is this question?",
-    answers: ["who knows.", "place holder", "placeholder", "placeholder"],
-    correctAns: 2
+    question: "What is the syntax used to create a timer?",
+    answers: [".setTimer()", "var x = setInterval(function(){},interval)", "setInterval(seconds,function)", "setTimer(function,time)"],
+    correctAns: 1
     };
 
 var question3 = {
-    question: "What functionality does JavaScript bring to a webpage?",
-    answers: ["It stylizes the webpage.", "place holder", "placeholder", "placeholder"],
-    correctAns: 1
+    question: "Commonly used data types DO NOT include:",
+    answers: ["Strings", "Booleans", "Alerts", "Numbers"],
+    correctAns: 2
     };
 
 var question4 = {
-    question: "What functionality does JavaScript bring to a webpage?",
-    answers: ["It stylizes the webpage.", "place holder", "placeholder", "placeholder"],
-    correctAns: 1
+    question: "What kind of declaration can store multiple variables that can be called individually?",
+    answers: ["String", "Array", "Matrix", "Object"],
+    correctAns: 3
     };
 
 var question5 = {
-    question: "What functionality does JavaScript bring to a webpage?",
-    answers: ["It stylizes the webpage.", "place holder", "placeholder", "placeholder"],
-    correctAns: 1
+    question: "Which of the following is used to access a DOM?",
+    answers: ["document.querySelector()", "document.getItem()", "getItem()", "fromHTML()"],
+    correctAns: 0
     };
 
 var questionList = [question1, question2, question3, question4, question5];
 var timer = 60;
 
+//The following function is called when the Start Game button is pressed. It includes the timer interval and what to do if an question is answered right/wrong
+
 function startGame() {
     var count = 0;
     var currentQ = 0;
     var score = 0;
+    sideBar.setAttribute("style", "display: flex");
     startquiz.remove();
     sideBar.setAttribute("style", "display: flex");
     printQuestion(questionList[count]);
@@ -62,11 +69,13 @@ function startGame() {
             scoreBoard.textContent = score;
             answerList.innerHTML ="";
             count++;
+            answer.textContent = "Correct!"
             printQuestion(questionList[count]);
         } else {
             timer -= 10;
             answerList.innerHTML = "";
             count++;
+            answer.textContent = "Incorrect!"
             printQuestion(questionList[count]);
         } 
     })
@@ -82,13 +91,18 @@ function startGame() {
             questionPrompt.textContent = "Game Over! You scored " + score + " points";
             clock.textContent = "";
             scoreBoard.textContent = "";
+            answerList.innerHTML = "";
+            answer.textContent = "";
             highScoreForm.setAttribute("style", "display: flex");
             sideBar.setAttribute("style", "display: none");
+
             savedScore = score;
         }
     }, 1000, count, questionList)
 }
 
+//This function is actually a recursive function of the one included in the startGame() function that exists so that the game can properly loop through the question list
+//The first instance starts the loop that allows it to complete until it runs out of questions to ask or time runs out
 
 function playGame(count) {
     printQuestion(questionList[count]);
@@ -99,11 +113,13 @@ function playGame(count) {
             scoreBoard.textContent = score;
             answerList.innerHTML ="";
             count++;
+            answer.textContent = "Correct!"
             printQuestion(questionList[count]);
         } else {
             timer -= 10;
             answerList.innerHTML = "";
             count++;
+            answer.textContent = "Incorrect!"
             printQuestion(questionList[count]);
         } 
         if (count == questionList.length) {
@@ -111,6 +127,9 @@ function playGame(count) {
         }
     })
 }
+
+//This function prints the question and answers
+
 function printQuestion(questionFeed) {
     questionPrompt.textContent = questionFeed.question;
     for (var i = 0; i < questionFeed.answers.length; i++) {
@@ -120,6 +139,8 @@ function printQuestion(questionFeed) {
         answerList.appendChild(btn).textContent = answer;
     }
 }
+
+//prints the list of saved highscores
 
 function printHighScore() {
     for (var i = 0; i < storedHS.length; i++) {
@@ -131,9 +152,10 @@ function printHighScore() {
 }
 
 
-startquiz.addEventListener("click", startGame);
-subBtn.addEventListener("click", function(event){
-    event.preventDefault();
+startquiz.addEventListener("click", startGame); //start the game
+
+subBtn.addEventListener("click", function(event){ //This triggers when the submit high score button is pressed after the quiz ends.  It prints the list of highscores
+    event.preventDefault();                       //It also saves the high score input to local storage.  In the future I can use "indexOf" to create an object that sorts highscores by numeric order
     var storedList = JSON.parse(localStorage.getItem("storedList"));
     if (storedList !== null) {
         storedHS = storedList
@@ -148,9 +170,11 @@ subBtn.addEventListener("click", function(event){
     subBtn.remove();
     hsInput.remove();
     quiz.setAttribute("style", "display: none");
-    hsTitle.setAttribute("style", "display: flex")
+    hsTitle.setAttribute("style", "display: flex");
 
 });
+
+//This clears the local storage for saved highscores on clear button click
 
 clearBtn.addEventListener("click", function(event){
     event.preventDefault();
@@ -161,7 +185,30 @@ clearBtn.addEventListener("click", function(event){
     printHighScore();
 });
 
+//This reloads the quiz
+
 backBtn.addEventListener("click", function(event){
     event.preventDefault();
     location.reload();
+})
+
+//When this button is pressed it takes the user directly to the highscores page
+
+viewHS.addEventListener("click", function(){
+    var storedList = JSON.parse(localStorage.getItem("storedList"));
+    if (storedList !== null) {
+        storedHS = storedList
+    }
+    if (hsInput.value != "") {
+        var hsName = hsInput.value + " " + savedScore;
+        storedHS.push(hsName);
+    }
+    hsInput.value = "";
+    localStorage.setItem("storedList", JSON.stringify(storedHS));
+    printHighScore();
+    quiz.setAttribute("style", "display: none");
+    highScoreForm.setAttribute("style", "display: flex");
+    hsInput.remove();
+    subBtn.remove();
+
 })

@@ -12,6 +12,7 @@
             <section class = "quiz">    
                 <span id = "question">Click the "Start Quiz" button to begin a practice quiz that tests you on the basics of JavaScript</span>
                 <ul id="answers"></ul>
+                <h4 id ="correct"></h4>
                 <button id = "startquiz">Start Quiz</button>
             </section>
             <form id="highscore-form" method = "POST" style = "display: none" >
@@ -25,7 +26,8 @@
                 </div>
             </form>
         </div>
-        <div id = "sidebar" style = "display: none;">
+        <button id = "viewHS">View Highscores</button>
+        <div id = "sidebar" style = "display: none">
          <h3>Time Remaining:  <span id = "timer">60</span> second(s) </h3>
          <h3>Score: <span id = "score">0</span></h3>
         </div>
