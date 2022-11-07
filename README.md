@@ -11,6 +11,8 @@ This is a quiz that tests your knowledge of JavaScript concepts.  It was created
   ## Mock-up
   The deployed page is live on [github](https://humzashaukat.github.io/JavaScriptQuiz/)
 
+  Here is a screenshot![screenshot](Assets/demo.jpg)
+
   ## License
 
   An MIT License was used
