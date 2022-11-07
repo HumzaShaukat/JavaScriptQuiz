@@ -1,16 +1,19 @@
-* {
-    background-color: black;
+body {
+    background-color: #211123;
 }
+
+/* The following section sets the card class to maintain it's position in the middle of the page */
 
 .card {
     display: flex;
     flex-direction: column;
-    min-height: 50vh;
+    min-height: 50%;
     min-width: 80%;
-    border: 5px solid white;
+    border-radius: 25px;
+    border: 5px solid #825b86;
     align-items: center;
-    background-color: black;
-    color: white;
+    background-color: #3c0d40;
+    color: #97b7a7;
     margin: 0;
     position: absolute;
     top: 50%;
@@ -19,8 +22,8 @@
     transform: translate(-50%, -50%);
 }
 
-.card li {
-    color: white;
+.card h1 {
+    padding-bottom: 2vh;
 }
 
 .quiz {
@@ -29,36 +32,75 @@
     align-items: center;
 }
 
-.card button {
-    background-color: white;
-    height: 5vh;
-    width: 10vw;
+.quiz ul {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
+
+.quiz button {
+    display: flex; /*setting basic properties for dynamically generated buttons*/
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 3 0.25 auto;
+    justify-content: center;
+    /*styling dynamically generated buttons*/
+    border-radius: 10px;
+    background-color: #60706d;
+    border: #8d6888 2px solid;
+    padding: 1vh;
+    margin: 1vh;
+    color: #97b7a7; 
+}
+
+#question {
+    padding-bottom: 3vh;
+}
+
+/* this section styles the form that displays highscores */
 
 #highscore-form {
     display: flex;
-    color: white;
+    color: #97b7a7;
     flex-direction: column;
 }
 
 .hsbuttons {
+    display: flex;
     flex-direction: row;
 }
 
 #highscore-form button {
+    flex: 2 0.5 auto;
     width: 5vw;
-    height: 10vh;
+    height: 5vh;
+    border: #8d6888 2px solid;
+    margin: 1vh;
+    color: #97b7a7;
+    background-color: #60706d;
 }
 
 #hs-input {
-    color: white;
-    border: 2px solid white;
+    color: #60706d;
+    border: 2px solid #8d6888;
+    background-color: #97b7a7;
 }
+
+/* This section makes sure the sidebar and view Highscores button are justified to the left of the page */
 
 #sidebar {
     display: flex;
     flex-direction: column;
-    color: white;
+    color: #97b7a7;
     justify-content: left;
 }
 
+#viewHS {
+    display: flex;
+    flex-direction: column;
+    color: #97b7a7;
+    justify-content: left;
+    background-color: #60706d;
+    border: #8d6888 2px solid;
+    border-radius: 5px;
+}
